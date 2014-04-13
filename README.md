@@ -5,4 +5,5 @@ My personal vim config and plugins.
 
 Install ctags-exuberant and php-cs-fixer.
 
-ln -s vim-config/vimrc ~/.vimrc
+1. Clone this project on your home.
+2. ln -s vim-config/vimrc ~/.vimrc
