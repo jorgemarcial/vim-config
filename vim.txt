@@ -1,0 +1,166 @@
+Moving
+------
+h/l/k/j left/right/up/down
+
+0 start of the current line
+^ first non blank character of the line
+$ end of the current line
+g_ last non blank character of the line
+
+f<char> next occurrence of character <char> inline (inclusive)
+F<char> previous occurrence of character <char> inline (inclusive)
+t<char> next occurrence of character <char> inline (exclusive)
+T<char> previous occurrence of character <char> inline (exclusive)
+gg/G jump to the start/end of the file
+:# go to line #
+% jump to the matching { } or ( ), etc
+{/} jump to next/previous paragraph
+/<text> search forward for <text>
+?<text> search backward for <text>
+/<text>\c search forward for <text> case insensitive
+* and # search for the word under the cursor forward/backward
+ma set mark "a" (a-z)
+'a start of the line with mark "a"
+`a go to mark "a"
+
+H first line of current screen
+M middle line of current screen
+L last line of current screen
+
+ctrl+f jump forward one full screen
+ctrl+b jump backwards one full screen
+ctrl+d jump forward (down) a half screen
+ctrl+u jump back (up) one half screen
+ctrl+y move screen down without moving cursor
+ctrl+e move screen up without moving cursor
+z<enter> move screen so current line is first
+zz move screen so current line is middle
+
+w next start of word
+W next start of WORD
+b previous start of word (before)
+B previous start of WORD (before)
+e next end of word
+E next end of WORD
+ge previous end of word
+gE previous end of WORD
+
+word sequence of letters, digits and underscores
+WORD sequence of non-blank characters, separated with white space
+
+'. jump back to last edited line
+g; jump back to last edited position
+
+ctrl+w + h/l/k/j move to left/right/up/down window
+
+Quick editing commands
+----------------------
+i/I insert at cursor/start of line
+a/A append to cursor/end of line
+x/X cut character at/before cursor
+y yank (copy, visual mode)
+yy yank line
+d delete (cut, visual mode)
+dd delete line
+D delete remaining part of line
+C change remaining part of line
+p/P paste after/before cursor
+o/O open a new line after/before the current
+v/V/ctrl+v visual mode (to select text!, single/line/block)
+o (visual mode) change side of selection
+r/R replace character/replace mode
+u/U undo one change/all changes in line
+ctrl+r redo one change
+
+Useful programmer commands
+--------------------------
+~ changes case
+gu lowercase
+gU uppercase
+J joins two lines
+ctrl+A/ctrl+X increments/decrements a number
+. repeat last command (a simple macro)
+== fix line indent
+> indent line/block
+< unindent line/block
+gf open file under cursor
+gg=G go to start of file and auto indent all
+ctrl-n/ctrl-p (insert mode) complete next/previous coincidence of typed word
+
+Folding
+-------
+set foldmethod=indent (indent, syntax)
+set foldcolumn=x (x number of tree columns)
+zo open fold
+zc close fold
+zR open all folds
+zM close all folds
+
+Combining commands. Most commands accept amount and direction, for example:
+-------------------
+<operator>a<object> operate an object
+<operator>i<object> operate inner object
+
+dw delete till start of next word
+cw change till start of next word (delete and insert mode)
+gUaw uppercase a word
+dap delete a paragraph
+vip select inner paragraph
+da" delete a "" block
+3cw change 3 words
+caw change a word
+ci" change inner ""
+va( visual select inner ()
+4dd delete 4 lines
+3x delete 3 characters
+3s substitute 3 characters
+d/foo delete till the next occurence of 'foo'
+v?foo visual select till de previous occurence of 'foo'
+df<char> delete inline to next <char> (inclusive)
+vT<char> select inline to previous <char> (exclusive)
+
+Macro recording
+---------------
+Press q[ key ] to start recording
+Then hit q to stop recording
+The macro can be played with @[ key ]
+
+Buffers (files opened)
+----------------------
+:e <file> edit/reload file
+:ls list buffers
+:b# go to buffer # (# can be the number or part of the buffer name)
+:bn go to next buffer
+:bp go to previous buffer
+:bw# wipe out buffer #
+:bw * + ctrl-a expands * into open buffers and wipe out all
+ctrl+6 jump between last and current buffer
+
+Windows
+-------
+:split/:vsplit <file/buffer> split horizontal/vertical a file or buffer
+ctrl+w + H/L/K/J moves current window to left/right/top/bottom
+:resize # (i.e. :resize 40)
+:vertical resize # (i.e. :vertical resize 40)
+ctrl+w + = resize all windows to the same size
+
+ctrl-p
+------
+ctrl-d change between path, files and mru
+ctrl-z mark multiple files
+ctrl-o open marked files
+
+ctags
+-----
+ctags-exuberant --languages=PHP -R --links=no --PHP-kinds=cf <path> <path> ...
+ctrl+p/n (insert mode) completes with previous/next coincidence
+:tag <className> open className definition
+ctrl+] open class/method definition under cursor
+ctrl+w+] open class/method definition under cursor in new window
+ctrl+t return to method call
+
+php-cs-fixer
+------------
+\pcd <path> fix coding standards of files in <path>
+\pcf <file> fix coding standards of file <file> (current file if not specified)
+
