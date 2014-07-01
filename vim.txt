@@ -127,6 +127,7 @@ The macro can be played with @[ key ]
 
 Buffers (files opened)
 ----------------------
+:args ~/* opens all files under ~/
 :e <file> edit/reload file
 :ls list buffers
 :b# go to buffer # (# can be the number or part of the buffer name)
@@ -135,10 +136,14 @@ Buffers (files opened)
 :bw# wipe out buffer #
 :bw * + ctrl-a expands * into open buffers and wipe out all
 ctrl+6 jump between last and current buffer
+(ball = all buffers)
+:sb# splits horizontally buffer #
+:vert sb# splits vertically buffer #
+:sf# splits horizontally file #
+:vert sf# splits vertically file #
 
 Windows
 -------
-:split/:vsplit <file/buffer> split horizontal/vertical a file or buffer
 ctrl+w + H/L/K/J moves current window to left/right/top/bottom
 :resize # (i.e. :resize 40)
 :vertical resize # (i.e. :vertical resize 40)

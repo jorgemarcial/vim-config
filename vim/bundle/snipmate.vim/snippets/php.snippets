@@ -119,7 +119,7 @@ snippet doc_h
 	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`
 	 * @package ${5:default}
 	 **/
-	
+
 	/**
 	 * Define DocBlock
 	 *//
@@ -214,3 +214,17 @@ snippet fun
 # $... = array (...)
 snippet array
 	$${1:arrayName} = array('${2}' => ${3});${4}
+
+# JMGM
+snippet vd
+	var_dump($${1:var});
+snippet vdd
+	var_dump($${1:var});die();
+snippet pf
+	print_f(${1});
+snippet pfd
+	print_f(${1});die();
+snippet dd
+	\Doctrine\Common\Util\Debug::dump($${1:var});
+snippet ddd
+	\Doctrine\Common\Util\Debug::dump($${1:var});die();
