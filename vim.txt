@@ -136,11 +136,6 @@ Buffers (files opened)
 :bw# wipe out buffer #
 :bw * + ctrl-a expands * into open buffers and wipe out all
 ctrl+6 jump between last and current buffer
-(ball = all buffers)
-:sb# splits horizontally buffer #
-:vert sb# splits vertically buffer #
-:sf# splits horizontally file #
-:vert sf# splits vertically file #
 
 Windows
 -------
@@ -148,6 +143,11 @@ ctrl+w + H/L/K/J moves current window to left/right/top/bottom
 :resize # (i.e. :resize 40)
 :vertical resize # (i.e. :vertical resize 40)
 ctrl+w + = resize all windows to the same size
+(ball = all buffers)
+:sb# splits horizontally buffer #
+:vert sb# splits vertically buffer #
+:sf# splits horizontally file #
+:vert sf# splits vertically file #
 
 ctrl-p
 ------
@@ -168,4 +168,14 @@ php-cs-fixer
 ------------
 \pcd <path> fix coding standards of files in <path>
 \pcf <file> fix coding standards of file <file> (current file if not specified)
+
+tabs
+----
+:tabnew create tab
+:tabclose delete tab
+:tabn next tab
+:tabp previous tab
+:tabm # move tab to position #
+:tabm +# move tab # positions right
+:tabm -# move tab # positions left
 
