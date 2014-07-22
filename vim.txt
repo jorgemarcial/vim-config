@@ -6,6 +6,7 @@ h/l/k/j left/right/up/down
 ^ first non blank character of the line
 $ end of the current line
 g_ last non blank character of the line
+gm middle of the line
 
 f<char> next occurrence of character <char> inline (inclusive)
 F<char> previous occurrence of character <char> inline (inclusive)
@@ -86,6 +87,8 @@ ctrl+A/ctrl+X increments/decrements a number
 gf open file under cursor
 gg=G go to start of file and auto indent all
 ctrl-n/ctrl-p (insert mode) complete next/previous coincidence of typed word
+gd go to declaration of identifier under cursor
+gD go to global declaration of identifier under cursor
 
 Folding
 -------
@@ -149,6 +152,16 @@ ctrl+w + = resize all windows to the same size
 :sf# splits horizontally file #
 :vert sf# splits vertically file #
 
+tabs
+----
+:tabnew create tab
+:tabclose delete tab
+:tabn next tab
+:tabp previous tab
+:tabm # move tab to position #
+:tabm +# move tab # positions right
+:tabm -# move tab # positions left
+
 ctrl-p
 ------
 ctrl-d change between path, files and mru
@@ -169,13 +182,9 @@ php-cs-fixer
 \pcd <path> fix coding standards of files in <path>
 \pcf <file> fix coding standards of file <file> (current file if not specified)
 
-tabs
-----
-:tabnew create tab
-:tabclose delete tab
-:tabn next tab
-:tabp previous tab
-:tabm # move tab to position #
-:tabm +# move tab # positions right
-:tabm -# move tab # positions left
+multiple-cursors
+----------------
+ctrl-k select mode and selects word under cursor and next occurrences
+ctrl-p (select mode) deselect current word
+ctrl-x skip current selected word
 
