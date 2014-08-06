@@ -31,7 +31,7 @@ let g:ctrlp_custom_ignore={
             \ }
 filetype plugin on
 filetype plugin indent on
-set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 let g:phpcomplete_complete_for_unknown_classes=0
 " set foldmethod=indent "indent, syntax
 " set foldcolumn=x
