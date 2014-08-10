@@ -2,6 +2,9 @@ Moving
 ------
 h/l/k/j left/right/up/down
 
++ down, first non-blank character
+- up, first non-blank character
+
 0 start of the current line
 ^ first non blank character of the line
 $ end of the current line
@@ -11,9 +14,12 @@ f<char> next occurrence of character <char> inline (inclusive)
 F<char> previous occurrence of character <char> inline (inclusive)
 t<char> next occurrence of character <char> inline (exclusive)
 T<char> previous occurrence of character <char> inline (exclusive)
+; repeat last f, F, t or T
+, repeat last f, F, t or T in opposite direction
 gg/G jump to the start/end of the file
 :# go to line #
 % jump to the matching { } or ( ), etc
+#% go to line on #% of the file (%50 is middle of the file)
 {/} jump to next/previous paragraph
 /<text> search forward for <text>
 ?<text> search backward for <text>
