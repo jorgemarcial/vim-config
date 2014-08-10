@@ -1,4 +1,7 @@
 set number
+set relativenumber
+autocmd InsertEnter * silent! :set norelativenumber
+autocmd InsertLeave * silent! :set relativenumber
 syntax on
 set cursorline
 set expandtab
@@ -45,9 +48,3 @@ let g:multi_cursor_next_key='<C-k>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
-:set rnu
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-
