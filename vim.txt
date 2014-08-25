@@ -65,6 +65,7 @@ y yank (copy, visual mode)
 yy yank line
 d delete (cut, visual mode)
 dd delete line
+S delete line and insert mode
 D delete remaining part of line
 C change remaining part of line
 p/P paste after/before cursor
