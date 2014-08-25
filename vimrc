@@ -1,4 +1,7 @@
 set number
+set relativenumber
+autocmd InsertEnter * silent! :set norelativenumber
+autocmd InsertLeave * silent! :set relativenumber
 syntax on
 set cursorline
 set expandtab
@@ -31,7 +34,7 @@ let g:ctrlp_custom_ignore={
             \ }
 filetype plugin on
 filetype plugin indent on
-set omnifunc=phpcomplete#CompletePHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 let g:phpcomplete_complete_for_unknown_classes=0
 " set foldmethod=indent "indent, syntax
 " set foldcolumn=x
@@ -40,4 +43,8 @@ let g:php_cs_fixer_level="all"
 let g:syntastic_mode_map={ 'mode': 'active',
             \ 'active_filetypes': [],
             \ 'passive_filetypes': ['html','xml'] }
-
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-k>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'

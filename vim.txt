@@ -2,6 +2,9 @@ Moving
 ------
 h/l/k/j left/right/up/down
 
++ down, first non-blank character
+- up, first non-blank character
+
 0 start of the current line
 ^ first non blank character of the line
 $ end of the current line
@@ -11,9 +14,12 @@ f<char> next occurrence of character <char> inline (inclusive)
 F<char> previous occurrence of character <char> inline (inclusive)
 t<char> next occurrence of character <char> inline (exclusive)
 T<char> previous occurrence of character <char> inline (exclusive)
+; repeat last f, F, t or T
+, repeat last f, F, t or T in opposite direction
 gg/G jump to the start/end of the file
 :# go to line #
 % jump to the matching { } or ( ), etc
+#% go to line on #% of the file (%50 is middle of the file)
 {/} jump to next/previous paragraph
 /<text> search forward for <text>
 ?<text> search backward for <text>
@@ -37,16 +43,13 @@ z<enter> move screen so current line is first
 zz move screen so current line is middle
 
 w next start of word
-W next start of WORD
+W next start of blank-separated word
 b previous start of word (before)
-B previous start of WORD (before)
+B previous start of blank-separated word (before)
 e next end of word
-E next end of WORD
+E next end of blank-separated word
 ge previous end of word
-gE previous end of WORD
-
-word sequence of letters, digits and underscores
-WORD sequence of non-blank characters, separated with white space
+gE previous end of blank-separated word
 
 '. jump back to last edited line
 g; jump back to last edited position
@@ -62,6 +65,7 @@ y yank (copy, visual mode)
 yy yank line
 d delete (cut, visual mode)
 dd delete line
+S delete line and insert mode
 D delete remaining part of line
 C change remaining part of line
 p/P paste after/before cursor
@@ -86,6 +90,8 @@ ctrl+A/ctrl+X increments/decrements a number
 gf open file under cursor
 gg=G go to start of file and auto indent all
 ctrl-n/ctrl-p (insert mode) complete next/previous coincidence of typed word
+gd go to declaration of identifier under cursor
+gD go to global declaration of identifier under cursor
 
 Folding
 -------
@@ -96,20 +102,33 @@ zc close fold
 zR open all folds
 zM close all folds
 
-Combining commands. Most commands accept amount and direction, for example:
+Objects
+-------
+w word
+W blank-separated word
+s sentence
+p paragraph
+t tag (markup languages)
+() parenthesis
+[] brackets
+{} braces
+""
+<>
+
+Combining commands. Most commands accept amount and direction:
 -------------------
 <operator>a<object> operate an object
 <operator>i<object> operate inner object
 
 dw delete till start of next word
 cw change till start of next word (delete and insert mode)
+caw change a word
 gUaw uppercase a word
 dap delete a paragraph
 vip select inner paragraph
-da" delete a "" block
+ci" change inner "" (even before the ""!)
+cit change inner tag
 3cw change 3 words
-caw change a word
-ci" change inner ""
 va( visual select inner ()
 4dd delete 4 lines
 3x delete 3 characters
@@ -149,6 +168,16 @@ ctrl+w + = resize all windows to the same size
 :sf# splits horizontally file #
 :vert sf# splits vertically file #
 
+tabs
+----
+:tabnew create tab
+:tabclose delete tab
+:tabn next tab
+:tabp previous tab
+:tabm # move tab to position #
+:tabm +# move tab # positions right
+:tabm -# move tab # positions left
+
 ctrl-p
 ------
 ctrl-d change between path, files and mru
@@ -169,13 +198,9 @@ php-cs-fixer
 \pcd <path> fix coding standards of files in <path>
 \pcf <file> fix coding standards of file <file> (current file if not specified)
 
-tabs
-----
-:tabnew create tab
-:tabclose delete tab
-:tabn next tab
-:tabp previous tab
-:tabm # move tab to position #
-:tabm +# move tab # positions right
-:tabm -# move tab # positions left
+multiple-cursors
+----------------
+ctrl-k select mode and selects word under cursor and next occurrences
+ctrl-p (select mode) deselect current word
+ctrl-x skip current selected word
 
