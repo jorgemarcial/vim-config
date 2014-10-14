@@ -39,7 +39,7 @@ let g:phpcomplete_complete_for_unknown_classes=0
 " set foldmethod=indent "indent, syntax
 " set foldcolumn=x
 let g:php_cs_fixer_path="php-cs-fixer"
-let g:php_cs_fixer_level="all"
+let g:php_cs_fixer_level="psr2"
 let g:syntastic_mode_map={ 'mode': 'active',
             \ 'active_filetypes': [],
             \ 'passive_filetypes': ['html','xml'] }
