@@ -217,13 +217,13 @@ snippet array
 
 # JMGM
 snippet vd
-	var_dump($${1:var});
+	\var_dump($${1:var});
 snippet vdd
-	var_dump($${1:var});die();
-snippet pf
-	print_f(${1});
-snippet pfd
-	print_f(${1});die();
+	\var_dump($${1:var});die();
+snippet pr
+	\print_r(${1});
+snippet prd
+	\print_r(${1});die();
 snippet dd
 	\Doctrine\Common\Util\Debug::dump($${1:var});
 snippet ddd
