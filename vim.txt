@@ -94,6 +94,7 @@ gd Go to declaration of identifier under cursor
 gD Go to global declaration of identifier under cursor
 !column -t Indents/aligns multiple columns
 !python -m json.tool Python unix tool, formats json lines
+norm <cmd> Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines)
 
 Folding
 -------
