@@ -76,8 +76,8 @@ r/R replace character/replace mode
 u/U undo one change/all changes in line
 ctrl+r redo one change
 
-Useful programmer commands
---------------------------
+Useful developer commands
+-------------------------
 ~ changes case
 gu lowercase
 gU uppercase
@@ -92,6 +92,7 @@ gg=G go to start of file and auto indent all
 ctrl-n/ctrl-p (insert mode) complete next/previous coincidence of typed word
 gd go to declaration of identifier under cursor
 gD go to global declaration of identifier under cursor
+norm <cmd> Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines)
 
 Folding
 -------
