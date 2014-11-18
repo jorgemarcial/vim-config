@@ -93,6 +93,7 @@ ctrl-n/ctrl-p (insert mode) complete next/previous coincidence of typed word
 gd go to declaration of identifier under cursor
 gD go to global declaration of identifier under cursor
 norm <cmd> Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines)
+g/<pattern>/<cmd> Executes <cmd> on every line with <pattern>
 
 Folding
 -------
