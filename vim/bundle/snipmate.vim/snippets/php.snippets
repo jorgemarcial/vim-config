@@ -216,15 +216,27 @@ snippet array
 	$${1:arrayName} = array('${2}' => ${3});${4}
 
 # JMGM
-snippet vd
-	\var_dump($${1:var});
-snippet vdd
-	\var_dump($${1:var});die();
+snippet ecd
+	echo("${1}");die();
 snippet pr
 	\print_r(${1});
 snippet prd
 	\print_r(${1});die();
+snippet vd
+	\var_dump($${1:var});
+snippet vdd
+	\var_dump($${1:var});die();
 snippet dd
 	\Doctrine\Common\Util\Debug::dump($${1:var});
 snippet ddd
 	\Doctrine\Common\Util\Debug::dump($${1:var});die();
+snippet tc
+	try {
+	    ${1}
+	} catch (${2}) {
+	    ${3}
+	}
+snippet die
+	die(${1});
+snippet auth
+	@author Jose Manuel García Maleno <josemanuel.garcia@unidadeditorial.es>
