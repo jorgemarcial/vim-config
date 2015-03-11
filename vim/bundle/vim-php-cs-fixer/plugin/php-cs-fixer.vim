@@ -46,6 +46,10 @@ fun! PhpCsFixerFix(path, dry_run)
         let command = command.' --fixers='.g:php_cs_fixer_fixers_list
     endif
 
+    if exists('g:php_cs_fixer_level')
+        let command = command.' --level='.g:php_cs_fixer_level
+    endif
+
     let s:output = system(command)
     if v:shell_error
         echohl Error | echo s:output | echohl None
