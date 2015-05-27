@@ -25,7 +25,7 @@ map <C-l> :bn<CR>
 map <C-n> :NERDTreeToggle<CR>
 let g:ctrlp_working_path_mode='c'
 let g:ctrlp_open_multiple_files='1'
-" let g:ctrlp_user_command='find %s -type f'
+let g:ctrlp_user_command='find %s -type f'
 set wildignore+=*/cache/*
 let g:ctrlp_custom_ignore={
             \ 'dir':  '\v[\/]\.(git|hg|svn|log)$',
