@@ -28,6 +28,7 @@ gg / G : Jump to the start / end of the file
 ma : Set mark "a" (a-z)
 'a : Start of the line with mark "a"
 `a : Go to mark "a"
+marks : View marks set
 
 H : First line of current screen
 M : Middle line of current screen
