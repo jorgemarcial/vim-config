@@ -103,9 +103,12 @@ Folding
 set foldmethod=indent (Indent, syntax)
 set foldcolumn=x (x number of tree columns)
 zo : Open fold
+zO : Open fold and subfolds
 zc : Close fold
+zC : Close all folds
+zr : Open everything one level (reduce folding)
 zR : Open all folds
-zM : Close all folds
+zm : Close everything one level
 
 Objects
 -------
