@@ -96,7 +96,8 @@ gD : Go to global declaration of identifier under cursor
 !column -t : Indents/aligns multiple columns
 !python -m json.tool : Python unix tool, formats json lines
 norm <cmd> : Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines)
-g/<pattern>/<cmd> : Executes <cmd> on every line with <pattern>
+g/<pattern>/<cmd> : Executes <cmd> on every line with <pattern> (:g/dog/d deletes all lines containing 'dog')
+g!/<pattern>/<cmd> : Executes <cmd> on every line without <pattern> (:g!/cat/d deletes all lines not containing 'cat')
 
 Folding
 -------
@@ -164,6 +165,7 @@ Buffers (files opened)
 :bw# : Wipe out buffer #
 :bw * + ctrl-a : Expands * into all open buffers and wipe out all
 ctrl+6 : Jump between last and current buffer
+:bufdo <cmd> : Executes <cmd> in all open buffers
 
 Windows
 -------
@@ -176,6 +178,7 @@ ctrl-w + = : Resize all windows to the same size
 (ball = All buffers)
 :sf# : Splits horizontally file #
 :vert sf# : Splits vertically file #
+:windo <cmd> : Executes <cmd> in all open windows
 
 Tabs
 ----
@@ -186,6 +189,7 @@ Tabs
 :tabm # : Move tab to position #
 :tabm +# : Move tab # positions right
 :tabm -# : Move tab # positions left
+:tabdo <cmd> : Executes <cmd> in all open tabs
 
 Ctrl-p
 ------
