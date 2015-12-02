@@ -19,7 +19,8 @@ set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
 colorscheme gruvbox
 let g:molokai_original = 1
-autocmd BufWritePre * :%s/\s\+$//e
+let blacklist = ['markdown']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | :%s/\s\+$//e
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 let g:phpcomplete_complete_for_unknown_classes=0
 " Folding.
@@ -53,4 +54,5 @@ map <C-h> :bp<CR>
 map <C-l> :bn<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :Tagbar<CR>
+
 

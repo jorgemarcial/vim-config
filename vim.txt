@@ -206,7 +206,8 @@ ctrl-o : Open marked files.
 
 Ctags
 -----
-ctags-exuberant --languages=PHP -R --links=no --PHP-kinds=cf <path> <path> ... (bash command).
+Bash command to construct tags file:
+    ctags-exuberant --languages=PHP -R --links=no --PHP-kinds=cf <path_to_your_code> <path_to_your_code> ...
 ctrl-p / ctrl-n : (Insert mode) Completes with previous / next coincidence.
 :tag <className> : Open className definition.
 ctrl-] : Open class/method definition under cursor.
