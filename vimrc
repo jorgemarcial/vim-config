@@ -4,6 +4,8 @@ set relativenumber
 autocmd InsertEnter * silent! :set norelativenumber
 autocmd InsertLeave * silent! :set relativenumber
 syntax on
+" Set the system clipboard as the default buffer. Needs +clipboard feature installed.
+set clipboard=unnamedplus
 set cursorline
 set expandtab
 set shiftwidth=4
