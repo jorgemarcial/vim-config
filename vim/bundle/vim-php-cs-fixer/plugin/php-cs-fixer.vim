@@ -9,7 +9,7 @@ let g:vim_php_cs_fixer = 1
 
 " Global options definition."{{{
 let g:php_cs_fixer_path = get(g:, 'php_cs_fixer_path', '~/php-cs-fixer.phar')
-let g:php_cs_fixer_level = get(g:, 'php_cs_fixer_level', 'all')
+let g:php_cs_fixer_level = get(g:, 'php_cs_fixer_level', 'symfony')
 let g:php_cs_fixer_php_path = get(g:, 'php_cs_fixer_php_path', 'php')
 let g:php_cs_fixer_enable_default_mapping = get(g:, 'php_cs_fixer_enable_default_mapping', '1')
 let g:php_cs_fixer_dry_run = get(g:, 'php_cs_fixer_dry_run', 0)
@@ -42,21 +42,23 @@ fun! PhpCsFixerFix(path, dry_run)
         let command = command.' --dry-run'
     endif
 
+    if exists('g:php_cs_fixer_level') && g:php_cs_fixer_level != 'all'
+        let command = command.' --level='.g:php_cs_fixer_level
+    endif
+
     if exists('g:php_cs_fixer_fixers_list')
         let command = command.' --fixers='.g:php_cs_fixer_fixers_list
     endif
 
-    if exists('g:php_cs_fixer_level')
-        let command = command.' --level='.g:php_cs_fixer_level
+    let s:output = system(command)
+
+    if a:dry_run != 1
+      exec 'edit!'
     endif
 
-    let s:output = system(command)
     if v:shell_error
         echohl Error | echo s:output | echohl None
     else
-        if a:dry_run != 1
-            exec 'edit!'
-        endif
         let s:nbLines = len(split(s:output, '\n'))
 
         if g:php_cs_fixer_verbose == 1

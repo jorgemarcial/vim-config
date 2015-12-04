@@ -25,4 +25,20 @@ fun! TestCase_returns_the_comment_block_without_last_and_first_line_and_without_
     call VUAssertEquals(
                 \ "@var Foo",
                 \ ret)
+
+    let ret = phpcomplete#GetDocBlock(g:fixture_class_content, '    public $bar;')
+    call VUAssertEquals(
+                \ "@type Bar",
+                \ ret)
 endf
+
+fun! TestCase_recognizes_a_oneline_comment_block_for_properties()
+    call SetUp()
+
+    let ret = phpcomplete#GetDocBlock(g:fixture_class_content, '    public $onliner;')
+    call VUAssertEquals(
+                \ "@var Bar",
+                \ ret)
+endf
+
+" vim: foldmethod=marker:expandtab:ts=4:sts=4

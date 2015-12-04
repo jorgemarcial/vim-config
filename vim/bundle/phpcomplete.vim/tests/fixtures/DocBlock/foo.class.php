@@ -13,6 +13,11 @@ class Foo {
     public $foo;
 
     /**
+     * @type Bar
+     */
+    public $bar;
+
+    /**
      * description, here i come
      *
      * @var string
@@ -45,4 +50,7 @@ class Foo {
      */
     public function minimally_commented() {
     }
+
+    /** @var Bar */
+    public $onliner;
 }
