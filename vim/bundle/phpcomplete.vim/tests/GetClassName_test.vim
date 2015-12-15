@@ -1,4 +1,14 @@
+fun! SetUp()
+    let g:php_builtin_classes = {}
+    let g:php_builtin_classnames = {}
+    let g:php_builtin_interfacenames = {}
+    let g:php_builtin_interfaces = {}
+    let g:php_builtin_functions = {}
+endf
+
 fun! TestCase_extract_class_from_the_same_file_when_line_referes_to_this()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo.class.php"
     below 1new
     exe ":silent! edit ".path
@@ -34,6 +44,8 @@ fun! TestCase_extract_class_from_the_same_file_when_line_referes_to_this()
 endf
 
 fun! TestCase_returns_empty_when_sees_curlyclose_on_line_start()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_outside.class.php"
     below 1new
     exe ":silent! edit ".path
@@ -50,6 +62,8 @@ fun! TestCase_returns_empty_when_sees_curlyclose_on_line_start()
 endf
 
 fun! TestCase_finds_abstract_classes()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_abstract.class.php"
     below 1new
     exe ":silent! edit ".path
@@ -82,6 +96,8 @@ fun! TestCase_finds_abstract_classes()
 endf
 
 fun! TestCase_finds_new_keyword_instantiations_in_parentheses_from_php5_4()
+    call SetUp()
+
     let classname = phpcomplete#GetClassName(1, '$a = (new FooClass)->', '\', {})
     call VUAssertEquals('FooClass', classname)
 
@@ -93,6 +109,8 @@ fun! TestCase_finds_new_keyword_instantiations_in_parentheses_from_php5_4()
 endf
 
 fun! TestCase_finds_variables_marked_with_AT_VAR_comments()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/var_comment_mark.php"
     below 1new
     exe ":silent! edit ".path
@@ -116,10 +134,36 @@ fun! TestCase_finds_variables_marked_with_AT_VAR_comments()
     let classname = phpcomplete#GetClassName(13, '$foo_conflicting_sources->', '\', {})
     call VUAssertEquals('Foo', classname, 'when multiple sources available for the class name, explicit marker takes precedence')
 
+    exe ':19'
+    let classname = phpcomplete#GetClassName(19, '$foo2->', '\', {})
+    call VUAssertEquals('Foo2', classname)
+
+    exe ':25'
+    let classname = phpcomplete#GetClassName(25, '$foo3->', '\', {})
+    call VUAssertEquals('Foo3', classname)
+
+    exe ':28'
+    let classname = phpcomplete#GetClassName(28, '$foo2->', '\', {})
+    call VUAssertEquals('Foo2', classname)
+
+    exe ':32'
+    let classname = phpcomplete#GetClassName(32, '$baz->', '\', {})
+    call VUAssertEquals('FooClass2', classname)
+
+    exe ':35'
+    let classname = phpcomplete#GetClassName(35, '$baz2->', '\', {})
+    call VUAssertEquals('FooClass2', classname)
+
+    exe ':38'
+    let classname = phpcomplete#GetClassName(38, '$baz3->', 'Bar', {})
+    call VUAssertEquals('Bar\FooClass2', classname)
+
     silent! bw! %
 endf
 
 fun! TestCase_finds_classes_from_variable_equals_new_class_lines()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_equals_new_foo.php"
     below 1new
     exe ":silent! edit ".path
@@ -133,13 +177,19 @@ fun! TestCase_finds_classes_from_variable_equals_new_class_lines()
     call VUAssertEquals('Bar\FooClass', classname)
 
     exe ':8'
-    let classname = phpcomplete#GetClassName(8, '$foo->', '\', {'RenamedFoo': {'name': 'OriginalFoo', 'kind': 'c', 'builtin':0,}})
+    let classname = phpcomplete#GetClassName(8, '$foo2->', '\', {'RenamedFoo': {'name': 'OriginalFoo', 'kind': 'c', 'builtin':0,}})
     call VUAssertEquals('OriginalFoo', classname)
+
+    exe ':12'
+    let classname = phpcomplete#GetClassName(12, '$foo3->', 'NS1', {})
+    call VUAssertEquals('NS2\Foo', classname)
 
     silent! bw! %
 endf
 
 fun! TestCase_finds_common_singleton_getInstance_calls()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/singleton_getinstance.php"
     below 1new
     exe ":silent! edit ".path
@@ -153,13 +203,19 @@ fun! TestCase_finds_common_singleton_getInstance_calls()
     call VUAssertEquals('Bar\FooClass', classname)
 
     exe ':8'
-    let classname = phpcomplete#GetClassName(8, '$foo->', '\', {'RenamedFoo': {'name': 'OriginalFoo', 'kind': 'c', 'builtin':0,}})
+    let classname = phpcomplete#GetClassName(8, '$foo2->', '\', {'RenamedFoo': {'name': 'OriginalFoo', 'kind': 'c', 'builtin':0,}})
     call VUAssertEquals('OriginalFoo', classname)
+
+    exe ':10'
+    let classname = phpcomplete#GetClassName(12, '$foo3->', 'NS1', {})
+    call VUAssertEquals('NS2\Foo', classname)
 
     silent! bw! %
 endf
 
 fun! TestCase_returns_return_type_of_built_in_objects_static_methods()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/builtin_static_return_type.php"
     below 1new
     exe ":silent! edit ".path
@@ -184,6 +240,8 @@ fun! TestCase_returns_return_type_of_built_in_objects_static_methods()
 endf
 
 fun! TestCase_returns_class_from_static_method_call()
+    call SetUp()
+
     let classname = phpcomplete#GetClassName(1, 'FooClass::', '\', {})
     call VUAssertEquals('FooClass', classname)
 
@@ -195,8 +253,12 @@ fun! TestCase_returns_class_from_static_method_call()
 endf
 
 fun! TestCase_returns_class_from_tags_with_tag_of_v_kind_and_a_new_equals_class_cmd()
+    call SetUp()
+
     " see TAGS file in the tests/fixtures/GetClassName directory
     exe 'set tags='.expand('%:p:h')."/".'fixtures/GetClassName/TAGS'
+    " enable variable search in tags
+    let g:phpcomplete_search_tags_for_variables = 1
 
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_only_from_tags.php"
     below 1new
@@ -206,14 +268,20 @@ fun! TestCase_returns_class_from_tags_with_tag_of_v_kind_and_a_new_equals_class_
     let classname = phpcomplete#GetClassName(3, '$foo_only_in_tags->', '\', {})
     call VUAssertEquals('FooClass', classname)
 
+    exe ':4'
+    let classname = phpcomplete#GetClassName(4, '$namespaced_foo_only_in_tags->', '\', {})
+    call VUAssertEquals('Test\FooClass', classname)
+
     " TODO
-    " exe ':5'
+    " exe ':6'
     " let classname = phpcomplete#GetClassName('$foo_only_in_tags::')
     " call VUAssertEquals('FooClass', classname)
     silent! bw! %
 endf
 
 fun! TestCase_extract_typehint_from_function_calls()
+    call SetUp()
+
     call phpcomplete#LoadData()
     let path = expand('%:p:h')."/"."fixtures/GetClassName/typehinted_functions.php"
     below 1new
@@ -267,10 +335,16 @@ fun! TestCase_extract_typehint_from_function_calls()
     let classname = phpcomplete#GetClassName(50, '$bar->', '\', {'RenamedFoo': {'name': 'OriginalFoo', 'kind': 'c', 'builtin':0,}})
     call VUAssertEquals('OriginalFoo', classname)
 
+    exe ':58'
+    let classname = phpcomplete#GetClassName(58, '$multi->', '\', {})
+    call VUAssertEquals('DateTime', classname)
+
     silent! bw! %
 endf
 
 fun! TestCase_extract_parameter_type_from_docblock()
+    call SetUp()
+
     let path = expand('%:p:h')."/"."fixtures/GetClassName/function_docblock.php"
     below 1new
     exe ":silent! edit ".path
@@ -291,10 +365,16 @@ fun! TestCase_extract_parameter_type_from_docblock()
     let classname = phpcomplete#GetClassName(39, '$bar3->', '\', {})
     call VUAssertEquals('BarClass3', classname)
 
+    exe ':54'
+    let classname = phpcomplete#GetClassName(54, '$docblocked->', '\', {})
+    call VUAssertEquals('DateTime', classname)
+
     silent! bw! %
 endf
 
 fun! TestCase_returns_static_function_calls_return_type()
+    call SetUp()
+
     exe 'set tags='.expand('%:p:h')."/".'fixtures/GetClassName/static_docblock_return_tags'
     let path = expand('%:p:h').'/'.'fixtures/GetClassName/static_docblock_return.php'
     below 1new
@@ -308,9 +388,9 @@ fun! TestCase_returns_static_function_calls_return_type()
 endf
 
 fun! TestCase_returns_static_function_calls_retun_type_with_namespaces()
+    call SetUp()
+
     let imports = {'P':{'name': 'Foo\Page', 'builtin': 0, 'kind': 'c'}, 'RenamedFoo':{'name': 'Foo', 'kind': 'n', 'builtin': 0, }}
-    let g:php_builtin_classes = {}
-    let g:php_builtin_classnames = {}
     exe 'set tags='.expand('%:p:h').'/'.'fixtures/GetClassName/static_docblock_return_tags'
     let path = expand('%:p:h').'/'.'fixtures/GetClassName/static_docblock_namespaced.php'
     below 1new
@@ -348,8 +428,7 @@ fun! TestCase_returns_static_function_calls_retun_type_with_namespaces()
 endf
 
 fun! TestCase_resolves_call_chains_return_type_with_this()
-    let g:php_builtin_classes = {}
-    let g:php_builtin_classnames = {}
+    call SetUp()
 
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_method_chains.php"
     below 1new
@@ -371,8 +450,7 @@ fun! TestCase_resolves_call_chains_return_type_with_this()
 endf
 
 fun! TestCase_resolves_call_chains_return_type_with_tags()
-    let g:php_builtin_classes = {}
-    let g:php_builtin_classnames = {}
+    call SetUp()
 
     exe 'set tags='.expand('%:p:h')."/".'fixtures/GetClassName/tags_inheritance'
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_inheritance_level1.php"
@@ -395,8 +473,7 @@ fun! TestCase_resolves_call_chains_return_type_with_tags()
 endf
 
 fun! TestCase_resolves_call_chains_return_type_with_php5_4_new()
-    let g:php_builtin_classes = {}
-    let g:php_builtin_classnames = {}
+    call SetUp()
 
     let path = expand('%:p:h')."/"."fixtures/GetClassName/foo_new_oneline_chain.php"
 
@@ -411,8 +488,7 @@ fun! TestCase_resolves_call_chains_return_type_with_php5_4_new()
 endf
 
 fun! TestCase_resolves_call_chains_return_type_with_when_chain_head_class_detectable()
-    let g:php_builtin_classes = {}
-    let g:php_builtin_classnames = {}
+    call SetUp()
 
     let path = expand('%:p:h')."/"."fixtures/GetClassName/call_chains.php"
 
@@ -445,6 +521,10 @@ fun! TestCase_resolves_call_chains_return_type_with_when_chain_head_class_detect
 
     exe ':80'
     let classname = phpcomplete#GetClassName(80, '$foo->bar->foo->', '\', {})
+    call VUAssertEquals('Foo', classname)
+
+    exe ':132'
+    let classname = phpcomplete#GetClassName(132, '$foo3->return_self()->return_()->', '\', {})
     call VUAssertEquals('Foo', classname)
 
     silent! bw! %
@@ -543,3 +623,258 @@ fun! TestCase_handles_parent_keyword()
 
     silent! bw! %
 endf
+
+fun! TestCase_catch_clause()
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/catch.php"
+
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':5'
+    let classname = phpcomplete#GetClassName(5, '$e->', '\', {})
+    call VUAssertEquals('Exception', classname)
+
+    exe ':11'
+    let classname = phpcomplete#GetClassName(11, '$e->', '\', {})
+    call VUAssertEquals('NS\Exception', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_builtin_function_return_type()
+    let g:php_builtin_functions = {
+        \ 'simplexml_load_string(': 'string $data [, string $class_name = "SimpleXMLElement" [, int $options = 0 [, string $ns = "" [, bool $is_prefix = false]]]] | SimpleXMLElement',
+        \}
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/builtin_function.php"
+
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':5'
+    let classname = phpcomplete#GetClassName(5, '$xml->', 'Foo', {})
+    call VUAssertEquals('SimpleXMLElement', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_function_return_type()
+    let g:php_builtin_functions = {}
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/function_return_type.php"
+    let tags_path = expand('%:p:h')."/".'fixtures/GetClassName/function_return_type_tags'
+    let old_style_tags_path = expand('%:p:h')."/".'fixtures/GetClassName/old_style_function_return_type_tags'
+    exe 'set tags='.tags_path
+
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':29'
+    let classname = phpcomplete#GetClassName(29, '$foo->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    exe ':32'
+    let classname = phpcomplete#GetClassName(32, '$foo2->', 'Foo', {'F': {'cmd': '/^class FooClass {$/', 'static': 0, 'name': 'FooClass', 'namespace': 'Foo', 'kind': 'c', 'builtin': 0, 'filename': 'fixtures/GetClassName/function_return_type.php'}})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    exe ':35'
+    let classname = phpcomplete#GetClassName(35, '$foo3->', 'Foo', {'F': {'cmd': '/^class FooClass {$/', 'static': 0, 'name': 'FooClass', 'namespace': 'Foo', 'kind': 'c', 'builtin': 0, 'filename': 'fixtures/GetClassName/function_return_type.php'}})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    " the same should work with old style tags too, namespaces are extracted
+    " from the source
+    exe 'set tags='.old_style_tags_path
+    exe ':29'
+    let classname = phpcomplete#GetClassName(29, '$foo->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    exe ':32'
+    let classname = phpcomplete#GetClassName(32, '$foo2->', 'Foo', {'F': {'cmd': '/^class FooClass {$/', 'static': 0, 'name': 'FooClass', 'kind': 'c', 'builtin': 0, 'filename': 'fixtures/GetClassName/function_return_type.php'}})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_function_invocation_return_type()
+    let g:php_builtin_functions = {
+        \ 'simplexml_load_string(': 'string $data [, string $class_name = "SimpleXMLElement" [, int $options = 0 [, string $ns = "" [, bool $is_prefix = false]]]] | SimpleXMLElement',
+        \}
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/function_return_type.php"
+    let tags_path = expand('%:p:h')."/".'fixtures/GetClassName/function_return_type_tags'
+    let old_style_tags_path = expand('%:p:h')."/".'fixtures/GetClassName/old_style_function_return_type_tags'
+
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    " built-in function with class return type
+    exe ':38'
+    let classname = phpcomplete#GetClassName(38, 'simplexml_load_string()->', 'Foo', {})
+    call VUAssertEquals('SimpleXMLElement', classname)
+
+    exe ':41'
+    let classname = phpcomplete#GetClassName(41, 'make_a_foo()->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    " renamed imports need tags to locate the renamed class
+    exe 'set tags='.tags_path
+    exe ':44'
+    let classname = phpcomplete#GetClassName(44, 'make_a_renamed_foo()->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    " renamed imports need tags to locate the renamed class
+    exe 'set tags='.tags_path
+    exe ':47'
+    let classname = phpcomplete#GetClassName(47, 'no_ns_make_a_foo()->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    " same import should work with old style tags too (namespace is ignored)
+    exe 'set tags='.tags_path
+    exe ':44'
+    let classname = phpcomplete#GetClassName(44, 'make_a_renamed_foo()->', 'Foo', {})
+    call VUAssertEquals('Foo\FooClass', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_resolves_self_this_static_in_return_docblock()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/self_return_type.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':32'
+    let classname = phpcomplete#GetClassName(32, '$b2->return_self()->', '', {})
+    call VUAssertEquals('Baz2', classname)
+
+    exe ':33'
+    let classname = phpcomplete#GetClassName(33, '$b2->return_this()->', '', {})
+    call VUAssertEquals('Baz2', classname)
+
+    exe ':34'
+    let classname = phpcomplete#GetClassName(34, '$b2->return_static()->', '', {})
+    call VUAssertEquals('Baz2', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_resolves_self_this_static_in_return_docblock_in_array_situation()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/self_return_type_array.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':38'
+    let classname = phpcomplete#GetClassName(38, '$self->', '', {})
+    call VUAssertEquals('Baz3', classname)
+
+    exe ':42'
+    let classname = phpcomplete#GetClassName(42, '$that->', '', {})
+    call VUAssertEquals('Baz3', classname)
+
+    exe ':46'
+    let classname = phpcomplete#GetClassName(46, '$static->', '', {})
+    call VUAssertEquals('Baz3', classname)
+
+    silent! bw! %
+endf
+
+" fails with the dist version
+fun! TestCase_resolves_classnames_with_multiple_methods_recursively()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/multi_hoops.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':16'
+    let classname = phpcomplete#GetClassName(16, '$result->', '', {})
+    call VUAssertEquals('Model', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_resolves_classnames_with_multiple_methods_recursively_even_with_extra_whitespace()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/multi_hoops_extra_whitespace.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':18'
+    let classname = phpcomplete#GetClassName(18, '$result->', '', {})
+    call VUAssertEquals('Model', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_resolves_classnames_from_cloned_variables()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/clone.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':5'
+    let classname = phpcomplete#GetClassName(5, '$d->', '', {})
+    call VUAssertEquals('DateTime', classname)
+
+    silent! bw! %
+endf
+
+fun! TestCase_should_not_loop_forever_around_stuff_having_the_word_class_class_in_them()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/stuff_with_the_word_class_in_them.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':8'
+    let classname = phpcomplete#GetClassName(8, '$this->', '', {})
+    call VUAssertEquals('will', classname) " the result in itself is wrong, the plugin picks up the class word inside of a string
+
+    exe ':13'
+    let classname = phpcomplete#GetClassName(12, 'self::', '', {})
+    call VUAssertEquals('will', classname) " the result in itself is wrong, the plugin picks up the class word inside of a string
+
+    exe ':16'
+    let classname = phpcomplete#GetClassName(15, 'parent::', '', {})
+    call VUAssertEquals('DateTime', classname)
+
+    silent! bw! %
+endf
+
+
+fun! TestCase_resolves_inside_a_function_body()
+    call SetUp()
+
+    let path = expand('%:p:h')."/"."fixtures/GetClassName/completion_in_function_insides.php"
+    below 1new
+    exe ":silent! edit ".path
+    exe 'let b:phpbegin = [0, 0]'
+
+    exe ':11'
+    let classname = phpcomplete#GetClassName(11, '$d->', '', {})
+    call VUAssertEquals('DateTime', classname) " the result in itself is wrong, the plugin picks up the class word inside of a string
+
+    exe ':20'
+    let classname = phpcomplete#GetClassName(20, '$d->', '', {})
+    call VUAssertEquals('DateTime', classname) " the result in itself is wrong, the plugin picks up the class word inside of a string
+
+    exe ':25'
+    let classname = phpcomplete#GetClassName(25, '$d->', '', {})
+    call VUAssertEquals('DateTime', classname) " the result in itself is wrong, the plugin picks up the class word inside of a string
+
+    silent! bw! %
+endf
+
+" vim: foldmethod=marker:expandtab:ts=4:sts=4
