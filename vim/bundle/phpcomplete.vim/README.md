@@ -1,5 +1,8 @@
 ## About
 Improved PHP omni-completion. Based on the default phpcomplete.vim.
+
+ [![Build Status](https://travis-ci.org/shawncplus/phpcomplete.vim.svg?branch=master)](https://travis-ci.org/shawncplus/phpcomplete.vim)
+
 ## Features
  * Correct restriction of static or standard methods based on context ( show only static methods with `::` and only standard with `->`)
  * Real support for `self::` and `$this->` with the aforementioned context restriction
@@ -18,6 +21,7 @@ Improved PHP omni-completion. Based on the default phpcomplete.vim.
  * Updated list of PHP constants
  * Updated list of built-in PHP functions
  * Namespace support ( **Requires** [patched ctags](https://github.com/shawncplus/phpcomplete.vim/wiki/Patched-ctags) )
+ * Enhanced jump-to-definition on <kbd>ctrl</kbd>+<kbd>]</kbd>
 
 ## Install
 
@@ -32,9 +36,9 @@ Improved PHP omni-completion. Based on the default phpcomplete.vim.
  1. Install and configure the [Vundle](https://github.com/gmarik/vundle) plugin manager, [follow the instructions here](https://github.com/gmarik/vundle#quick-start)
  2. Add the following line to your `.vimrc`:
 
-         Bundle 'shawncplus/phpcomplete.vim'
+         Plugin 'shawncplus/phpcomplete.vim'
  3. Source your `.vimrc` with `:so %` or otherwise reload your vim
- 4. Run the `:BundleInstall` commmand
+ 4. Run the `:PluginInstall` commmand
 
 ## ctags
 In order to support some php features introduced in PHP 5.3 you will have to use
@@ -48,12 +52,18 @@ Check out the **[wiki page about the patched ctags](https://github.com/shawncplu
 Enables completion for non-static methods when completing for static context (`::`).
 This generates `E_STRICT` level warning, but php calls these methods nontheless.
 
-**let g:phpcomplete\_complete\_for\_unknown\_classes = 1/0 [default 1]** <br>
-Enables completion of variables and functions in "everything under the sun" fassion
+**let g:phpcomplete\_complete\_for\_unknown\_classes = 1/0 [default 0]** <br>
+Enables completion of variables and functions in "everything under the sun" fashion
 when completing for an instance or static class context but the code can't tell the class
 or locate the file that it lives in.
 The completion list generated this way is only filtered by the completion base
 and generally not much more accurate then simple keyword completion.
+
+**let g:phpcomplete\_search\_tags\_for\_variables = 1/0 [default 0]** <br>
+Enables use of tags when the plugin tries to find variables.
+When enabled the plugin will search for the variables in the tag files with kind 'v',
+lines like `$some_var = new Foo;` but these usually yield highly inaccurate results and
+can	be fairly slow.
 
 **let g:phpcomplete\_min\_num\_of\_chars\_for\_namespace\_completion = n [default 1]** *Requires [patched ctags](https://github.com/shawncplus/phpcomplete.vim/wiki/Patched-ctags)* <br>
 This option controls the number of characters the user needs to type before
@@ -71,6 +81,34 @@ Enabling this option will add return types to the completion menu for functions 
 When enabled the taglist() lookups will be cached and subsequent searches
 for the same pattern will not check the tagfiles any more, thus making the
 lookups faster. Cache expiration is based on the mtimes of the tag files.
+
+**let g:phpcomplete_enhance_jump_to_definition = 1/0  [default 1]<br>**
+When enabled the `<C-]>` will be mapped to `phpcomplete#JumpToDefinition()`
+which will try to make a more educated guess of the current
+symbol's location than simple tag search. If the symbol's location
+cannot be found the original `<C-]>` functionality will be invoked
+
+**let g:phpcomplete\_mappings = {..} <br>**
+Defines the mappings for the enhanced jump-to-definition.
+
+**Recognized keys:**
+
+ - **jump\_to\_def**: Jumps to the definition in the current buffer
+ - **jump\_to\_def\_split**: Jumps to the definition in a new split buffer
+ - **jump\_to\_def\_vsplit**: Jumps to the definition in a new vertical split buffer
+
+You change any of them like this in your `vimrc`:
+
+    let g:phpcomplete_mappings = {
+      \ 'jump_to_def': ',g',
+      \ }
+The keys you don't specify will be mapped to the defaults:
+
+    let g:phpcomplete_mappings = {
+       \ 'jump_to_def': '<C-]>',
+       \ 'jump_to_def_split': '<C-W><C-]>',
+       \ 'jump_to_def_vsplit': '<C-W><C-\>',
+       \}
 
 **let g:phpcomplete\_add\_function\_extensions = [...]**<br>
 **let g:phpcomplete\_add\_class\_extensions = [...]**<br>
@@ -101,4 +139,4 @@ If you want to disable an otherwise enabled one, use the ..._remove_... version 
     let g:phpcomplete_remove_function_extensions = ['xslt_php_4']
     let g:phpcomplete_remove_constant_extensions = ['xslt_php_4']
 
-For the available extension files, check the directories under `misc/`
+For the available extension files, check the [`misc/available_extensions`](https://github.com/shawncplus/phpcomplete.vim/blob/master/misc/available_extensions). file

@@ -2,211 +2,226 @@ Moving
 ------
 h / l / k / j : Left / right / up / down.
 
-+ : Down, first non-blank character
-- : Up, first non-blank character
++ : Down, to first non-blank character.
+- : Up, to first non-blank character.
 
-0 : Start of the current line
-^ : First non blank character of the line
-$ : End of the current line
-g_ : Last non blank character of the line
+0 : Start of the current line.
+^ : First non blank character of the current line.
+$ : End of the current line.
+g_ : Last non blank character of the current line.
 
-f<char> : Next occurrence of character <char> inline (inclusive)
-F<char> : Previous occurrence of character <char> inline (inclusive)
-t<char> : Next occurrence of character <char> inline (exclusive)
-T<char> : Previous occurrence of character <char> inline (exclusive)
-; : Repeat last f, F, t or T
-, : Repeat last f, F, t or T in opposite direction
-gg / G : Jump to the start / end of the file
-:# : Go to line #
-% : Jump to the matching { } or ( ), etc
-#% : Go to line on #% of the file (%50 is middle of the file)
-{ / } : Jump to previous / next paragraph
-/<text> : Search forward for <text>
-?<text> : Search backward for <text>
-/<text>\c : Search forward for <text> case insensitive
-* - # : Search for the word under the cursor forward/backward
-ma : Set mark "a" (a-z)
-'a : Start of the line with mark "a"
-`a : Go to mark "a"
-marks : View marks set
+f<char> : Next occurrence of character <char> in line (inclusive).
+F<char> : Previous occurrence of character <char> in line (inclusive).
+t<char> : Next occurrence of character <char> in line (exclusive).
+T<char> : Previous occurrence of character <char> in line (exclusive).
+; : Repeat last f, F, t or T.
+, : Repeat last f, F, t or T in the opposite direction.
 
-H : First line of current screen
-M : Middle line of current screen
-L : Last line of current screen
+gg / G : Jump to the start / end of the file.
+:# : Go to line #.
+% : Jump to the matching { }, ( ), etc.
+#% : Go to the line on the #% of the file (50% is the middle of the file).
+{ / } : Jump to the previous / next paragraph.
+/<text> : Search forward for <text>.
+?<text> : Search backward for <text>.
+/<text>\c : Search forward for <text> case insensitive.
+* / # : Search for the word under the cursor forward / backward.
+ma : Set mark "a" (a-z).
+'a : Start of the line with mark "a".
+`a : Go to mark "a".
+marks : View marks set.
 
-ctrl-f : Jump forward one full screen
-ctrl-b : Jump backwards one full screen
-ctrl-d : Jump forward (down) a half screen
-ctrl-u : Jump back (up) one half screen
-ctrl-y : Move screen down without moving cursor
-ctrl-e : Move screen up without moving cursor
-z<enter> : Move screen so current line is first
-zz : Move screen so current line is middle
+H : First line of the current screen.
+M : Middle line of the current screen.
+L : Last line of the current screen.
 
-w : Next start of word
-W : Next start of blank-separated word
-b : Previous start of word (before)
-B : Previous start of blank-separated word (before)
-e : Next end of word
-E : Next end of blank-separated word
-ge : Previous end of word
-gE : Previous end of blank-separated word
+ctrl-f : Jump forward one full screen.
+ctrl-b : Jump backward one full screen.
+ctrl-d : Jump forward (down) half a screen.
+ctrl-u : Jump back (up) half a screen.
+ctrl-y : Move screen down without moving cursor.
+ctrl-e : Move screen up without moving cursor.
+z<enter> : Move screen so the current line is first.
+zz : Move screen so the current line is middle.
 
-'. : Jump back to last edited line
-g; : Jump back to last edited position
+w : Next start of word.
+W : Next start of blank-separated word.
+b : Previous start of word (before).
+B : Previous start of blank-separated word (before).
+e : Next end of word.
+E : Next end of blank-separated word.
+ge : Previous end of word.
+gE : Previous end of blank-separated word.
 
-ctrl-w + h / l / k / j Move to left / right / up / down window
+'. : Jump back to last edited line.
+g; : Jump back to last edited position.
+
+ctrl-w + h / l / k / j : Move to left / right / up / down window.
 
 Quick editing commands
 ----------------------
-i / I : Insert at cursor / start of line
-a / A : Append to cursor / end of line
-x / X : Cut character at/before cursor
-y : Yank (copy, visual mode)
-yy : Yank line
-d : Delete (cut, visual mode)
-dd : Delete line
-S : Delete line and insert mode
-D : Delete remaining part of line
-C : Change remaining part of line
-p / P : Paste after / before cursor
-o / O : Open a new line after / before the current
-v / V / ctrl+v : Visual mode (to select text!, single / line / block)
-o : (Visual mode) Change side of selection
-r / R : Replace character / replace mode
-u / U : Undo one change/all changes in line
-ctrl-r : Redo one change
+i / I : Insert at cursor / start of line.
+a / A : Append to cursor / end of line.
+x / X : Cut character at / before cursor.
+y : Yank (copy, visual mode).
+yy : Yank line.
+d : Delete (cut, visual mode).
+dd : Delete line.
+S : Delete line and insert mode.
+D : Delete remaining part of line.
+C : Change remaining part of line.
+p / P : Paste after / before cursor.
+o / O : Open a new line after / before the current line.
+v / V / ctrl+v : Visual mode (to select text, single / line / block).
+gv : Reselect previous selection.
+o : (Visual mode) Change side of selection.
+r / R : Replace character / replace mode.
+u / U : Undo one change / all changes in line.
+ctrl-r : Redo one change.
 
 Useful developer commands
 -------------------------
-~ : Change case
-gu : Lowercase
-gU : Uppercase
-J : Joins two lines
-ctrl-A / ctrl-X : Increments / decrements a number
-. : Repeat last command (a simple macro)
-== : Fix line indent
-> : Indent line/block
-< : Unindent line/block
-gf : Open file under cursor
-gg=G : Go to start of file and auto indent all
-ctrl-n / ctrl-p : (Insert mode) Complete next/previous coincidence of typed word
-gd : Go to declaration of identifier under cursor
-gD : Go to global declaration of identifier under cursor
-!column -t : Indents/aligns multiple columns
-!python -m json.tool : Python unix tool, formats json lines
-norm <cmd> : Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines)
-g/<pattern>/<cmd> : Executes <cmd> on every line with <pattern>
+~ : Change case.
+gu : Lowercase.
+gU : Uppercase.
+J : Joins two lines.
+ctrl-A / ctrl-X : Increments / decrements the number under cursor.
+. : Repeat last command.
+== : Fix line indent.
+> : Indent line or selected block.
+< : Unindent line or selected block.
+gf : Open file under cursor.
+gg=G : Go to the first line and indent to the last one (everything).
+ctrl-n / ctrl-p : (Insert mode) Complete next / previous coincidence of typed word.
+gd : Go to declaration of identifier under cursor.
+gD : Go to global declaration of identifier under cursor.
+!column -t : Indents / aligns multiple columns.
+!python -m json.tool : Python unix tool, formats json lines.
+norm <cmd> : Executes <cmd> on every line selected (:%norm 0daW deletes the first WORD in all lines).
+g/<pattern>/<cmd> : Executes <cmd> on every line with <pattern> (:g/dog/d deletes all lines containing 'dog').
+g!/<pattern>/<cmd> : Executes <cmd> on every line without <pattern> (:g!/cat/d deletes all lines not containing 'cat').
 
 Folding
 -------
-set foldmethod=indent (Indent, syntax)
-set foldcolumn=x (x number of tree columns)
-zo : Open fold
-zc : Close fold
-zR : Open all folds
-zM : Close all folds
+set foldmethod=indent (Indent, syntax).
+set foldcolumn=x (x number of tree columns).
+zo : Open fold.
+zO : Open fold and subfolds.
+zc : Close fold.
+zC : Close all folds.
+zr : Open everything one level (reduce folding).
+zR : Open all folds.
+zm : Close everything one level.
 
 Objects
 -------
-w : Word
-W : Blank-separated word
-s : Sentence
-p : Paragraph
-t : Tag (markup languages)
-() : Parenthesis
-[] : Brackets
-{} : Braces
-'' : Quotes
-"" : Double quotes
-<> : Angle brackets
+w : Word.
+W : Blank-separated word.
+s : Sentence.
+p : Paragraph.
+t : Tag (markup languages).
+() : Parenthesis.
+[] : Brackets.
+{} : Braces.
+'' : Quotes.
+"" : Double quotes.
+<> : Angle brackets.
 
-Combining commands. Most commands accept amount and direction:
+Combining commands.
 -------------------
-<operator>a<object> : Operate an object
-<operator>i<object> : Operate inner object
+Most commands accept amount and direction:
 
-dw : Delete till start of next word
-cw : Change till start of next word (delete and insert mode)
-caw : Change a word
-gUaw : Uppercase a word
-dap : Delete a paragraph
-vip : Select inner paragraph
-ci" : Change inner "" (even before the ""!)
-cit : Change inner tag
-3cw : Change 3 words
-va( : Visual select () and its content
-4dd : Delete 4 lines
-3x : Delete 3 characters
-3s : Substitute 3 characters
-d / foo : Delete till the next occurence of 'foo'
-v?foo : Visual select till de previous occurence of 'foo'
-df<char> : Delete inline to next <char> (inclusive)
-vT<char> : Select inline to previous <char> (exclusive)
+<operator>a<object> : Operate an object.
+<operator>i<object> : Operate inner object.
+
+dw : Delete till start of next word.
+cw : Change till start of next word (delete and insert mode).
+caw : Change a word.
+gUaw : Uppercase a word.
+dap : Delete a paragraph.
+vip : Select inner paragraph.
+ci" : Change inner "" (even before the "").
+cit : Change inner tag.
+3cw : Change 3 words.
+va( : Visual select () and its content.
+4dd : Delete 4 lines.
+3x : Delete 3 characters.
+3s : Substitute 3 characters.
+d/foo : Delete till the next occurence of 'foo'.
+v?foo : Visual select till de previous occurence of 'foo'.
+df<char> : Delete inline to next <char> (inclusive).
+vT<char> : Select inline to previous <char> (exclusive).
 
 Macro recording
 ---------------
-Press q<key> to start recording
-Then hit q to stop recording
-The macro can be played with @<key>
+1. Press q<key> to start recording, do things.
+2. Hit q to stop recording.
+3. Use @<key> to execute the macro.
 
 Buffers (files opened)
 ----------------------
-:args ~/* : Opens all files under ~/
-:e <file> : Edit/reload file
-:ls : List buffers
-:b# : Go to buffer # (# can be the number or part of the buffer name)
-:bn : Go to next buffer
-:bp : Go to previous buffer
-:bw# : Wipe out buffer #
-:bw * + ctrl-a : Expands * into all open buffers and wipe out all
-ctrl+6 : Jump between last and current buffer
+:args ~/* : Opens all files under ~/.
+:e <file> : Edit/reload file.
+:ls : List buffers.
+:b# : Go to buffer # (# can be the number or part of the buffer name).
+:bn : Go to next buffer.
+:bp : Go to previous buffer.
+:bw# : Wipe out buffer #.
+:bw * + ctrl-a : Expands * into all open buffers and wipe out all.
+ctrl+6 : Jump between last and current buffer.
+:bufdo <cmd> : Executes <cmd> in all open buffers.
 
 Windows
 -------
-ctrl-w + H / L / K / J : Moves current window to left/right/top/bottom
-:resize # : I.e. :resize 40
-:vertical resize # : I.e. :vertical resize 40
-ctrl-w + = : Resize all windows to the same size
-:sb# : Splits horizontally buffer #
-:vert sb# : Splits vertically buffer #
-(ball = All buffers)
-:sf# : Splits horizontally file #
-:vert sf# : Splits vertically file #
+ctrl-w + H / L / K / J : Moves current window to left / right / top / bottom.
+:resize # : I.e. :resize 40.
+:vertical resize # : I.e. :vertical resize 40.
+ctrl-w + = : Resize all windows to the same size.
+:sb# : Splits horizontally buffer #.
+:vert sb# : Splits vertically buffer #.
+(ball = All buffers).
+:sf# : Splits horizontally file #.
+:vert sf# : Splits vertically file #.
+:windo <cmd> : Executes <cmd> in all open windows.
 
 Tabs
 ----
-:tabnew : Create tab
-:tabclose : Delete tab
-:tabn : Next tab
-:tabp : Previous tab
-:tabm # : Move tab to position #
-:tabm +# : Move tab # positions right
-:tabm -# : Move tab # positions left
+:tabnew : Create tab.
+:tabclose : Delete tab.
+:tabn : Next tab.
+:tabp : Previous tab.
+:tabm # : Move tab to position #.
+:tabm +# : Move tab # positions right.
+:tabm -# : Move tab # positions left.
+:tabdo <cmd> : Executes <cmd> in all open tabs.
+
+Plugins:
+========
 
 Ctrl-p
 ------
-ctrl-d : Change between path, files and mru
-ctrl-z : Mark multiple files
-ctrl-o : Open marked files
+ctrl-d : Change between path, files and mru.
+ctrl-z : Mark multiple files.
+ctrl-o : Open marked files.
 
 Ctags
 -----
-ctags-exuberant --languages=PHP -R --links=no --PHP-kinds=cf <path> <path> ...
-ctrl-p / ctrl-n : (Insert mode) Completes with previous / next coincidence
-:tag <className> : Open className definition
-ctrl-] : Open class/method definition under cursor
-ctrl-w + ] : Open class/method definition under cursor in new window
-ctrl-t : Return to method call
+Bash command to construct tags file:
+    ctags-exuberant --languages=PHP -R --links=no --PHP-kinds=cf <path_to_your_code> <path_to_your_code> ...
+ctrl-p / ctrl-n : (Insert mode) Completes with previous / next coincidence.
+:tag <className> : Open className definition.
+ctrl-] : Open class/method definition under cursor.
+ctrl-w + ] : Open class/method definition under cursor in new window.
+ctrl-t : Return to method call.
 
 Php-cs-fixer
 ------------
-\pcd <path> : Fix coding standards of files in <path>
-\pcf <file> : Fix coding standards of file <file> (current file if not specified)
+\pcd <path> : Fix coding standards of files in <path>.
+\pcf <file> : Fix coding standards of file <file> (current file if not specified).
 
 Multiple-cursors
 ----------------
-ctrl-k : Select mode and selects word under cursor and next occurrences
-ctrl-p : (Select mode) Deselect current word
-ctrl-x : Skip current selected word
+ctrl-k : Switch to select mode and selects word under cursor and next occurrences.
+ctrl-p : (Select mode) Deselect current word.
+ctrl-x : Skip current selected word.
 
