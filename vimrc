@@ -61,4 +61,3 @@ map <C-t> :Tagbar<CR>
 " set foldmethod=syntax " Common values: indent, syntax.
 " set foldcolumn=4 " Number of columns that will be used to show the indentation levels on the left.
 " let g:php_folding=1 " Better PHP folding.
-
