@@ -2,11 +2,9 @@
 
 My personal vim config and plugins, PHP optimized. Looking for a vim reference? Check my [vim-reference](https://github.com/jmgarciamaleno/vim-reference) project.
 
-I run only one vim instance and work with buffers (opened files). This allows to easily copy/paste content between them, run commands in all of them and keep a controlled set of classes and methods for omni-code completion.  
-NerdTree, MiniBuffExplorer and CtrlP makes really easy to manage buffers.
+I run only one vim instance and work with buffers (opened files). This allows to easily copy/paste content between them, run commands in all of them and keep a controlled set of classes and methods for omni-code completion. NerdTree, MiniBuffExplorer and CtrlP makes really easy to manage buffers.
 
-I've found handy to use line relative numbers so you can see the distance to the line where you want to jump (i.e: 10 lines down) and get there with just `10j`. In insert mode normal numbers are displayed.  
-To deactivate this behaviour, comment/remove the line `set relativenumber` in *.vimrc*.
+I've found handy to use line relative numbers so you can see the distance to the line where you want to jump (i.e: 10 lines down) and get there with just `10j`. Normal numbers are displayed in insert mode.
 
 This is how it looks like. You can see MiniBuffExplorer showing current buffers in the upper line:
 
@@ -22,23 +20,23 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
     mv .vim .vim_backup
     ```
 
-2. Install this project. This steps will install it in your home folder, for other folder replace `~` with the path you wish:
+2. Install this project. Replace `<APP_PATH>` with the path you wish:
 
     ```bash
-    cd ~
+    cd <APP_PATH>
     git clone https://github.com/jmgarciamaleno/vim-config.git
-    ln -s vim-config/vimrc ~/.vimrc
-    ln -s vim-config/vim ~/.vim
+    ln -s <APP_PATH>/vim-config/vimrc ~/.vimrc
+    ln -s <APP_PATH>/vim-config/vim ~/.vim
     ```
 
 ## Uninstall.
 
-1. Uninstall this project. If you didn't install this project at your home folder, replace `~` with the installation path:
+1. Uninstall this project. Replace `<APP_PATH>` with the path you wish:
 
     ```bash
-    cd ~
     unlink ~/.vimrc
     unlink ~/.vim
+    cd <APP_PATH>
     rm -rf vim-config
     ```
 
@@ -52,15 +50,16 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
 
 ## Optional but highly recommended.
 
-1. The vim feature *xterm-clipboard* allows to copy/paste content from/to the system clipboard (vim register + or \*). Check `vim --version` to see which features are installed (the ones with +). In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features to vim, install it with `sudo apt-get install vim-gnome`.
+1. The vim feature *xterm-clipboard* allows to copy/paste content from/to the system clipboard (vim register + or \*). Check `vim --version` to see which features are installed.  
+In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features to vim, install it with `sudo apt-get install vim-gnome`.
 
 2. Install **exuberant-ctags** or **ctags** for better omni-code completion:
-    - Debian based systems (Ubuntu): `sudo apt-get install exuberant-ctags`
-    - OSX with brew: `brew install ctags`
+    - Debian based systems (Ubuntu): `sudo apt-get install exuberant-ctags`.
+    - OSX with brew: `brew install ctags`.
 
     Info about how to construct your tags file and use it inside vim below.
 
-3. For PHP: Install [php-cs-fixer](http://cs.sensiolabs.org/) to keep PHP coding standards. The **vim-php-cs-fixer** plugin is installed to make use of it.
+3. For PHP: Install the shell tool [php-cs-fixer](http://cs.sensiolabs.org/) to keep PHP coding standards. The [vim-php-cs-fixer](https://github.com/stephpy/vim-php-cs-fixer) plugin allows to make use of it from vim.
 
 ## Custom mappings.
 
@@ -152,7 +151,7 @@ Run vim at your project root to make use of the created tags file.
 
 ### Vim-php-cs-fixer.
 
-[Php-cs-fixer](http://cs.sensiolabs.org/) is a great shell tool to automatically fix PHP coding standards for the given file, or files under the given folder. This plugin allows to apply **php-cs-fixer** from vim.
+[Php-cs-fixer](http://cs.sensiolabs.org/) is a great shell tool to automatically fix PHP coding standards for the given file, or files under the given folder. This plugin allows to run it from vim.
 
 If you run `\pcf` without arguments, the current buffer is fixed and saved. Reload the buffer with `:e!` to see it updated.
 
