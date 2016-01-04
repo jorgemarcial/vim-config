@@ -4,7 +4,7 @@ My personal vim config and plugins, PHP optimized. Looking for a vim reference? 
 
 I run only one vim instance and work with buffers (opened files). This allows to easily copy/paste content between them, run commands in all of them and keep a controlled set of classes and methods for omni-code completion. NerdTree, MiniBuffExplorer and CtrlP makes really easy to manage buffers.
 
-I've found handy to use line relative numbers so you can see the distance to the line where you want to jump (i.e: 10 lines down) and get there with just `10j`. Normal numbers are displayed in insert mode.
+I've found handy to use line relative numbers so you can see the distance to the line where you want to jump and get there with a simple motion command. E.g: `10j` to jump 10 lines down. Normal line numbers are displayed in insert mode.
 
 This is how it looks like. You can see MiniBuffExplorer showing current buffers in the upper line:
 
@@ -31,7 +31,7 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
 
 ## Uninstall.
 
-1. Uninstall this project. Replace `<APP_PATH>` with the path you wish:
+1. Uninstall this project. Replace `<APP_PATH>` with the path where you installed this project:
 
     ```bash
     unlink ~/.vimrc
@@ -125,9 +125,9 @@ This plugin allows to select the word under the cursor and the next occurrences,
 
 ### Exuberant-ctags / Ctags.
 
-Not a vim plugin but a shell tool. It constructs a tags file with classes, methods, etc. for the given code language and folders.
+Not a vim plugin but a shell tool. It constructs a tags file with classes, methods, ... for the given code language and folders.
 
-Run this bash command (replace PHP with your code language) at your project root to construct the tags file with class and methods only:
+Run this bash command (replace PHP with your code language) at your project root to construct the tags file with classes and methods only:
 
 ```bash
 exuberant-ctags --languages=PHP -R --links=no --PHP-kinds=cf <path1_to_your_code> <path2_to_your_code> ...
@@ -142,12 +142,12 @@ Run vim at your project root to make use of the created tags file.
 
 | Command | Action |
 |---------|--------|
-| ctrl-n | (Insert mode) Completes the word being written with the next coincidence. |
-| ctrl-p | (Insert mode) Completes the word being written with the previous coincidence. |
-| :tag \<className> | Opens the \<className> definition. |
-| ctrl-] | Open the class/method definition of the word under the cursor. |
-| ctrl-w + ] | Opens the class/method definition of the word under the cursor in a new window. |
-| ctrl-t | Return to the point where the class/method definition was called. |
+| ctrl-n | (Insert mode) Complete the word being written with the next coincidence. |
+| ctrl-p | (Insert mode) Complete the word being written with the previous coincidence. |
+| :tag \<className> | Open the \<className> definition. |
+| ctrl-] | Open the class/method/variable definition of the word under the cursor. |
+| ctrl-w + ] | Open the class/method/variable definition of the word under the cursor in a new window. |
+| ctrl-t | Return to the point where the class/method/variable definition was called. |
 
 ### Vim-php-cs-fixer.
 

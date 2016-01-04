@@ -1,4 +1,5 @@
 " CONFIG VARS.
+set hidden " Don't close buffers with changes when you open another one.
 set number " Line numbers.
 set relativenumber " Numbers relative to the cursor line.
 autocmd InsertEnter * silent! :set norelativenumber " Normal numbers in insert mode.
@@ -12,7 +13,6 @@ set shiftwidth=4 " Number of spaces used for indentation.
 set softtabstop=4 " Backspace key treat the tab spaces as a single tab.
 set autoindent " Auto indent new lines.
 set hlsearch " Highlight search occurrences.
-set hidden " Don't close buffers with changes when you open another one.
 set wildmenu " Enables bottom menu with a list of completions. Tab cycles through them.
 set colorcolumn=100 " Vertical line indicator.
 set term=xterm-256color " Name of the terminal. Tells vim to display better colors.
@@ -58,6 +58,6 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-t> :Tagbar<CR>
 
 " FOLDING.
-" set foldmethod=syntax " Common values: indent, syntax.
+" set foldmethod=syntax " Common values: indent, syntax, diff.
 " set foldcolumn=4 " Number of columns that will be used to show the indentation levels on the left.
 " let g:php_folding=1 " Better PHP folding.
