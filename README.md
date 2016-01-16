@@ -1,4 +1,4 @@
-# Vim-config.
+# Vim-config
 
 My personal vim config and plugins, PHP optimized. Looking for a vim reference? Check my [vim-reference](https://github.com/jmgarciamaleno/vim-reference) project.
 
@@ -10,7 +10,7 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
 
 ![alt vim](vim.png)
 
-## Install.
+## Install
 
 1. Backup your current vim files:
 
@@ -29,7 +29,7 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
     ln -s <APP_PATH>/vim-config/vim ~/.vim
     ```
 
-## Uninstall.
+## Uninstall
 
 1. Uninstall this project. Replace `<APP_PATH>` with the path where you installed this project:
 
@@ -48,7 +48,7 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
     mv .vim_backup .vim
     ```
 
-## Optional but highly recommended.
+## Optional but highly recommended
 
 1. The vim feature *xterm-clipboard* allows to copy/paste content from/to the system clipboard (vim register + or \*). Check `vim --version` to see which features are installed.  
 In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features to vim, install it with `sudo apt-get install vim-gnome`.
@@ -61,7 +61,7 @@ In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features
 
 3. For PHP: Install the shell tool [php-cs-fixer](http://cs.sensiolabs.org/) to keep PHP coding standards. The [vim-php-cs-fixer](https://github.com/stephpy/vim-php-cs-fixer) plugin allows to make use of it from vim.
 
-## Custom mappings.
+## Custom mappings
 
 | Command | Action |
 |---------|--------|
@@ -71,7 +71,7 @@ In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features
 | ctrl-p | Open/close Ctrl-P. |
 | ctrl-t | Open/close TagBar. |
 
-## Plugins list.
+## Plugins list
 
 Light plugins which provide the features that I miss in the standard vim:
 
@@ -89,9 +89,9 @@ Light plugins which provide the features that I miss in the standard vim:
 - [Vim-PHP-cs-fixer](https://github.com/stephpy/vim-php-cs-fixer)
 - [Vim-Twig](https://github.com/beyondwords/vim-twig)
 
-## Plugins basic commands.
+## Plugins basic commands
 
-### NerdTree.
+### NerdTree
 
 Sidebar file explorer. Press `?` in NerdTree for quick key reference. Basic commands:
 
@@ -102,7 +102,7 @@ Sidebar file explorer. Press `?` in NerdTree for quick key reference. Basic comm
 | x | Close parent node. |
 | s | Open node vertically splitted. |
 
-### Ctrl-P.
+### Ctrl-P
 
 Fuzzy file finder.
 
@@ -113,7 +113,7 @@ Fuzzy file finder.
 | ctrl-z | Mark multiple files. |
 | ctrl-o | Open marked files. |
 
-### Multiple-cursors.
+### Multiple-cursors
 
 This plugin allows to select the word under the cursor and the next occurrences, to edit them all at the same time.
 
@@ -123,7 +123,7 @@ This plugin allows to select the word under the cursor and the next occurrences,
 | ctrl-p | (Select mode) Deselect current word. |
 | ctrl-x | Skip current selected word. |
 
-### Exuberant-ctags / Ctags.
+### Exuberant-ctags / Ctags
 
 Not a vim plugin but a shell tool. It constructs a tags file with classes, methods, ... for the given code language and folders.
 
@@ -149,7 +149,7 @@ Run vim at your project root to make use of the created tags file.
 | ctrl-w + ] | Open the class/method/variable definition of the word under the cursor in a new window. |
 | ctrl-t | Return to the point where the class/method/variable definition was called. |
 
-### Vim-php-cs-fixer.
+### Vim-php-cs-fixer
 
 [Php-cs-fixer](http://cs.sensiolabs.org/) is a great shell tool to automatically fix PHP coding standards for the given file, or files under the given folder. This plugin allows to run it from vim.
 
