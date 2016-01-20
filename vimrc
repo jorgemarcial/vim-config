@@ -1,4 +1,5 @@
 " CONFIG VARS.
+
 set hidden " Don't close buffers with changes when you open another one.
 set number " Line numbers.
 set relativenumber " Numbers relative to the cursor line.
@@ -29,6 +30,7 @@ let g:phpcomplete_complete_for_unknown_classes=0 " Don't try to complete unknown
 filetype plugin indent on " Filetype specific detection, plugins and indentation.
 
 " PLUGINS VARS.
+
 execute pathogen#infect()
 let g:NERDTreeWinSize=40
 let g:ctrlp_working_path_mode='c'
@@ -52,12 +54,14 @@ let g:tagbar_indent=0
 let g:tagbar_show_visibility=1
 
 " MAPPINGS.
+
 map <C-h> :bp<CR>
 map <C-l> :bn<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :Tagbar<CR>
 
 " FOLDING.
+
 " set foldmethod=syntax " Common values: indent, syntax, diff.
 " set foldcolumn=4 " Number of columns that will be used to show the indentation levels on the left.
 " let g:php_folding=1 " Better PHP folding.
