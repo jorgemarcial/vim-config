@@ -20,7 +20,7 @@ set term=xterm-256color " Name of the terminal. Tells vim to display better colo
 set t_Co=256 " Maximum number of colors that can be displayed.
 set backup " Create a backup file when an existent file is modified.
 set backupdir=~/.vim/backup/ " Backup files path.
-set directory=~/.vim/swap/ " Swap (temportal) files path.
+set directory=~/.vim/swap/ " Swap (temporal) files path.
 colorscheme gruvbox " Colors.
 let g:molokai_original = 1 " Molokai colorscheme original colors.
 let blacklist = ['markdown'] " Array of filetypes where trailing spaces will not be removed on save.
