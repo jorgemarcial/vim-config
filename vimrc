@@ -1,12 +1,11 @@
-" CONFIG VARS.
+" CONFIG OPTIONS.
+
 set hidden " Don't close buffers with changes when you open another one.
 set number " Line numbers.
 set relativenumber " Numbers relative to the cursor line.
 autocmd InsertEnter * silent! :set norelativenumber " Normal numbers in insert mode.
 autocmd InsertLeave * silent! :set relativenumber " Relative numbers in normal mode.
 syntax on " Code syntax.
-" set clipboard=unnamedplus " Set the system clipboard as the default register (Ubuntu).
-" set clipboard=unnamed " Set the system clipboard as the default register (OSX).
 set cursorline " Highlight the cursor line.
 set expandtab " Tab key insert spaces.
 set shiftwidth=4 " Number of spaces used for indentation.
@@ -19,16 +18,19 @@ set term=xterm-256color " Name of the terminal. Tells vim to display better colo
 set t_Co=256 " Maximum number of colors that can be displayed.
 set backup " Create a backup file when an existent file is modified.
 set backupdir=~/.vim/backup/ " Backup files path.
-set directory=~/.vim/swap/ " Swap (temportal) files path.
+set directory=~/.vim/swap/ " Swap (temporal) files path.
 colorscheme gruvbox " Colors.
 let g:molokai_original = 1 " Molokai colorscheme original colors.
 let blacklist = ['markdown'] " Array of filetypes where trailing spaces will not be removed on save.
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | :%s/\s\+$//e " Remove trailing spaces on save.
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP " Use phpcomplete plugin omnicode.
-let g:phpcomplete_complete_for_unknown_classes=0 " Don't try to complete unknown classes code.
 filetype plugin indent on " Filetype specific detection, plugins and indentation.
+set nofoldenable " Deactivate fold by default, set foldenable to activate.
+set foldmethod=syntax " Common values: indent, syntax, diff.
+" set foldcolumn=4 " Number of columns that will be used to show the indentation levels on the left.
+let g:php_folding=1 " Better PHP folding.
 
-" PLUGINS VARS.
+" PLUGINS OPTIONS.
+
 execute pathogen#infect()
 let g:NERDTreeWinSize=40
 let g:ctrlp_working_path_mode='c'
@@ -41,6 +43,8 @@ let g:syntastic_mode_map={
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['html','xml']
 \}
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP " Use phpcomplete plugin omnicode.
+let g:phpcomplete_complete_for_unknown_classes=0 " Don't try to complete unknown classes code.
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-k>'
 let g:multi_cursor_prev_key='<C-p>'
@@ -52,12 +56,8 @@ let g:tagbar_indent=0
 let g:tagbar_show_visibility=1
 
 " MAPPINGS.
+
 map <C-h> :bp<CR>
 map <C-l> :bn<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :Tagbar<CR>
-
-" FOLDING.
-" set foldmethod=syntax " Common values: indent, syntax, diff.
-" set foldcolumn=4 " Number of columns that will be used to show the indentation levels on the left.
-" let g:php_folding=1 " Better PHP folding.
