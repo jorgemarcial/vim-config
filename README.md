@@ -50,14 +50,17 @@ This is how it looks like. You can see MiniBuffExplorer showing current buffers 
 
 ## Optional but highly recommended
 
-1. The vim feature *xterm-clipboard* allows to copy/paste content from/to the system clipboard (vim register + or \*). Check `vim --version` to see which features are installed.  
-In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features to vim, install it with `sudo apt-get install vim-gnome`.
+1. The vim feature *xterm-clipboard* allows to copy/paste content from/to the system clipboard (vim register `+` or `*`).  
+   Check `vim --version` to see which features are installed.
+
+   In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features to vim. To install it:  
+   `sudo apt-get install vim-gnome`
 
 2. Install **exuberant-ctags** or **ctags** for better omni-code completion:
-    - Debian based systems (Ubuntu): `sudo apt-get install exuberant-ctags`.
-    - OSX with brew: `brew install ctags`.
+   - Debian based systems (Ubuntu): `sudo apt-get install exuberant-ctags`
+   - OSX with brew: `brew install ctags`
 
-    Info about how to construct your tags file and use it inside vim below.
+   Info about how to construct your tags file and use it inside vim below.
 
 3. For PHP: Install the shell tool [php-cs-fixer](http://cs.sensiolabs.org/) to keep PHP coding standards. The [vim-php-cs-fixer](https://github.com/stephpy/vim-php-cs-fixer) plugin allows to make use of it from vim.
 
@@ -65,11 +68,11 @@ In Ubuntu, the package *vim-gnome* adds the *xterm-clipboard* and other features
 
 | Command | Action |
 |---------|--------|
-| ctrl-h | Previous buffer (h is left). |
-| ctrl-l | Next buffer (l is right). |
-| ctrl-n | Open/close NerdTree. |
-| ctrl-p | Open/close Ctrl-P. |
-| ctrl-t | Open/close TagBar. |
+| ctrl-h | Previous buffer (h is left) |
+| ctrl-l | Next buffer (l is right) |
+| ctrl-n | Open/close NerdTree |
+| ctrl-p | Open/close Ctrl-P |
+| ctrl-t | Open/close TagBar |
 
 ## Plugins list
 
@@ -97,21 +100,21 @@ Sidebar file explorer. Press `?` in NerdTree for quick key reference. Basic comm
 
 | Command | Action |
 |---------|--------|
-| ctrl-n | Open/close NerdTree. |
-| o | Open node. |
-| x | Close parent node. |
-| s | Open node vertically splitted. |
+| ctrl-n | Open/close NerdTree |
+| o | Open node |
+| x | Close parent node |
+| s | Open node vertically splitted |
 
 ### Ctrl-P
 
-Fuzzy file finder.
+Fuzzy file finder. It works at the path of the buffer from which you open it so I recommend to open NerdTree at your project root and open Ctrl-P from NerdTree.
 
 | Command | Action |
 |---------|--------|
-| ctrl-p | Open/close Ctrl-P. |
-| ctrl-d | Change mode between path, files and MRU. |
-| ctrl-z | Mark multiple files. |
-| ctrl-o | Open marked files. |
+| ctrl-p | Open/close Ctrl-P |
+| ctrl-d | Change mode between path, files and MRU |
+| ctrl-z | Mark multiple files |
+| ctrl-o | Open marked files |
 
 ### Multiple-cursors
 
@@ -119,9 +122,9 @@ This plugin allows to select the word under the cursor and the next occurrences,
 
 | Command | Action |
 |---------|--------|
-| ctrl-k | Switch to select mode and selects word under cursor and next occurrences. |
-| ctrl-p | (Select mode) Deselect current word. |
-| ctrl-x | Skip current selected word. |
+| ctrl-k | Switch to select mode and selects word under cursor and next occurrences |
+| ctrl-p | (Select mode) Deselect current word |
+| ctrl-x | Skip current selected word |
 
 ### Exuberant-ctags / Ctags
 
@@ -142,12 +145,12 @@ Run vim at your project root to make use of the created tags file.
 
 | Command | Action |
 |---------|--------|
-| ctrl-n | (Insert mode) Complete the word being written with the next coincidence. |
-| ctrl-p | (Insert mode) Complete the word being written with the previous coincidence. |
-| :tag \<className> | Open the \<className> definition. |
-| ctrl-] | Open the class/method/variable definition of the word under the cursor. |
-| ctrl-w + ] | Open the class/method/variable definition of the word under the cursor in a new window. |
-| ctrl-t | Return to the point where the class/method/variable definition was called. |
+| ctrl-n | (Insert mode) Complete the word being written with the next coincidence |
+| ctrl-p | (Insert mode) Complete the word being written with the previous coincidence |
+| :tag \<className> | Open the \<className> definition |
+| ctrl-] | Open the class/method/variable definition of the word under the cursor |
+| ctrl-w + ] | Open the class/method/variable definition of the word under the cursor in a new window |
+| ctrl-t | Return to the point where the class/method/variable definition was called |
 
 ### Vim-php-cs-fixer
 
@@ -159,9 +162,9 @@ You can set the fixing level that you want to apply in your vim config (my defau
 
 | Command | Action |
 |---------|--------|
-| \pcf | Fix coding standards of the current buffer. |
-| \pcf \<file> | Fix coding standards of \<file>. |
-| \pcd \<folder> | Fix coding standards of files under \<folder>. |
+| \pcf | Fix coding standards of the current buffer |
+| \pcf \<file> | Fix coding standards of \<file> |
+| \pcd \<folder> | Fix coding standards of files under \<folder> |
 
 ---
 
